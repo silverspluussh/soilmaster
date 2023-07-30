@@ -7,9 +7,8 @@ import 'package:soilmaster/new_version/widgets/navigation.dart';
 import 'package:soilmaster/src/firebase/crops/cropdata.dart';
 import 'package:soilmaster/src/widgets/cContainer.dart';
 import 'package:soilmaster/src/widgets/formwidget.dart';
-import 'package:soilmaster/weatherman/providers/reminderprovider.dart';
+import 'package:soilmaster/tools/reminderprovider.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../src/models/crop/crop.dart';
 import '../../tools/pushnotifications.dart';
 
