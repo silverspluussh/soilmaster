@@ -6,6 +6,7 @@ import 'package:soilmaster/new_version/pages/crop.dart';
 import 'package:soilmaster/new_version/pages/home.dart';
 import 'package:soilmaster/new_version/pages/notes.dart';
 import 'package:soilmaster/new_version/pages/settings.dart';
+import 'package:soilmaster/new_version/pages/weather.dart';
 import '../providers/navprovider.dart';
 
 class Mainrender extends ConsumerStatefulWidget {
@@ -28,6 +29,7 @@ class _MainrenderState extends ConsumerState<Mainrender> {
 
     pages = [
       const Homepage(),
+      const Weatherman(),
       const Notes(),
       const Analysis(),
       const Croppage(),
@@ -61,6 +63,12 @@ class _MainrenderState extends ConsumerState<Mainrender> {
               ),
               label: 'Home',
             ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.cloud,
+                  size: 20,
+                ),
+                label: 'Weather'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.note,
