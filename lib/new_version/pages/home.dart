@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:soilmaster/constants/colors.dart';
 import 'package:soilmaster/tools/soilmaster.dart';
-import 'package:soilmaster/weatherman/ui/weatherwidget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Homepage extends ConsumerStatefulWidget {
