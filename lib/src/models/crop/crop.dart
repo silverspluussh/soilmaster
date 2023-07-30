@@ -16,7 +16,7 @@ class Crop {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['cropname'] = croptype;
+    data['cropname'] = cropname;
     data['croptype'] = croptype;
     data['plantingtime'] = plantingtime;
     return data;
