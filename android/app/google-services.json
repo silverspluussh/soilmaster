@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1069663818145",
+    "project_id": "soil-master-b6b9d",
+    "storage_bucket": "soil-master-b6b9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069663818145:android:04978864fb31b73328bbe0",
+        "android_client_info": {
+          "package_name": "com.example.soilmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069663818145-f9d65e4pga8rcpv7qv7dpmdbt5jief79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soilmaster",
+            "certificate_hash": "778bec3733ddebf200a0ef143f49449bc3dbe892"
+          }
+        },
+        {
+          "client_id": "1069663818145-m50153s52k9vnrpm4r68ct35jsh5fks0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf2obVdzgiL09oiOxqwz9Bp9Y4fr3wwCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069663818145-3q2ojg9strstmpkj619vgkc27smkk1ve.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1069663818145-d49nf8dadhdcbqaio1r45j5ifr94fqi8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.soilmaster"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
