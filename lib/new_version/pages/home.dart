@@ -63,7 +63,7 @@ class _HomepageState extends ConsumerState<Homepage> {
                         readCard(context,
                             title: 'Soil',
                             subt: 'Humidity',
-                            value: "${call.humidity} mmHg"),
+                            value: "${call.humidity} %"),
                         readCard(context,
                             title: 'Soil',
                             subt: 'Moisture level',

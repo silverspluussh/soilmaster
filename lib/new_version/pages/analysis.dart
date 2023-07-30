@@ -72,7 +72,7 @@ class _AnalysisState extends State<Analysis> {
                                 ),
                                 child: ListTile(
                                   trailing: Text(
-                                    '${master.humidity.toString()} mmHg',
+                                    '${master.humidity.toString()} %',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: kWhiteColor,
