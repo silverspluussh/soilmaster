@@ -25,10 +25,9 @@ Future<void> main() async {
   prefs = await SharedPreferences.getInstance();
 
   FlutterFireUIAuth.configureProviders([const EmailProviderConfiguration()]);
+  await configureLocalTimeZone();
 
   await NotificationBundle().initialzeNotification();
-
-  await configureLocalTimeZone();
 
   runApp(const ProviderScope(
     child: MyApp(),

@@ -14,7 +14,7 @@ class NotificationBundle {
       const AndroidInitializationSettings('@mipmap/ic_launcher');
 
   AndroidNotificationDetails notifDetails = AndroidNotificationDetails(
-      idg().toString(), 'medbox${idg()}',
+      idg().toString(), '${idg()}',
       fullScreenIntent: true,
       color: kPrimaryColor.withOpacity(0.3),
       priority: Priority.high,

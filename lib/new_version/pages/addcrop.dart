@@ -89,7 +89,7 @@ class _AddCropState extends ConsumerState<AddCrop> {
         Card(
           color: kPrimaryColor.withOpacity(0.5),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               final crop = ref.watch(cropRepoProvider);
 
               final cmodel = Crop(
@@ -98,20 +98,17 @@ class _AddCropState extends ConsumerState<AddCrop> {
                 plantingtime: plantingtime.text,
               );
 
-              crop.addCrop(model: cmodel).whenComplete(() {
+              crop.addCrop(model: cmodel).then((b) async {
                 context.pop();
-                return VxToast.show(context,
-                    textSize: 11,
-                    msg: 'Crop added successfully.',
-                    bgColor: const Color.fromARGB(255, 38, 99, 40),
-                    textColor: Colors.white,
-                    pdHorizontal: 30,
-                    pdVertical: 20);
-              }).then((value) {
-                NotificationBundle().scheduleDailyTenAMNotification();
-                cropname.clear();
-                croptype.clear();
-                plantingtime.clear();
+                await NotificationBundle().scheduleDailyTenAMNotification();
+                await NotificationBundle().instancems();
+                // return VxToast.show(context,
+                //     textSize: 11,
+                //     msg: 'Crop added successfully.',
+                //     bgColor: const Color.fromARGB(255, 38, 99, 40),
+                //     textColor: Colors.white,
+                //     pdHorizontal: 30,
+                //     pdVertical: 20);
               });
             },
             child: const Text('Add crop').p8().centered(),

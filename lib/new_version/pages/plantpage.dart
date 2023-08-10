@@ -243,7 +243,8 @@ class _PlantcropState extends ConsumerState<Plantcrop> {
                     IconButton(
                         onPressed: () => ref
                             .read(cropRepoProvider)
-                            .delcrop(crop: widget.crops),
+                            .delcrop(crop: widget.crops)
+                            .then((value) => context.pop()),
                         icon: const Icon(
                           Icons.delete,
                           color: Colors.red,

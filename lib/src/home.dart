@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:soilmaster/constants/colors.dart';
+import 'package:soilmaster/tools/pushnotifications.dart';
 import 'package:soilmaster/tools/soilmaster.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -51,7 +52,7 @@ class _HomepageState extends ConsumerState<Homepage> {
                     SliverToBoxAdapter(
                       child: Container(
                         width: size.width,
-                        height: size.height * 0.15,
+                        height: size.height * 0.13,
                         margin: const EdgeInsets.all(5),
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -90,7 +91,7 @@ class _HomepageState extends ConsumerState<Homepage> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 10,
-                      childAspectRatio: 0.8,
+                      childAspectRatio: 1,
                       children: [
                         cardwidget(size,
                             image: 'assets/icons/thermometer-5-128.png',
