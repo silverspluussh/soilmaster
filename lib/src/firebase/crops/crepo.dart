@@ -37,8 +37,9 @@ class CropRepo {
     return farmsnap.docs.map((farm) => farm.data()).toList();
   }
 
-  Future<void> delcrop({required String uid, required Crop crop}) =>
-      _firestore.doc(fpath(cid: crop.cid!, uid: uid)).delete();
+  Future<void> delcrop({required Crop crop}) => _firestore
+      .doc(fpath(cid: crop.cid!, uid: FirebaseAuth.instance.currentUser!.uid))
+      .delete();
 
   Stream<List<Crop>> streamCrops({required String uid}) {
     final reference = queryCrops(uid: uid);

@@ -14,7 +14,7 @@ class Notes extends ConsumerWidget {
     final notesC = ref.watch(notesStreamProvider);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Notes'),
+          title: const Text('Notes'),
           centerTitle: true,
         ),
         body: notesC.when(
@@ -34,7 +34,7 @@ class Notes extends ConsumerWidget {
                                   children: [
                                     const Text('Title:'),
                                     const SizedBox(width: 20),
-                                    Text(data[index].title!)
+                                    Text(data[index].title!),
                                   ],
                                 ),
                                 Row(
@@ -44,6 +44,17 @@ class Notes extends ConsumerWidget {
                                     Text(data[index].body!)
                                   ],
                                 ),
+                                const SizedBox(height: 10),
+                                GestureDetector(
+                                  onTap: () => ref
+                                      .read(notesRepoProvider)
+                                      .deleteNote(data[index]),
+                                  child: Card(
+                                    color: Colors.red[500],
+                                    child:
+                                        const Text('Delete note').px8().py4(),
+                                  ),
+                                )
                               ],
                             );
                           }),

@@ -6,14 +6,6 @@ import 'package:flutter/foundation.dart'
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -63,7 +55,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1069663818145',
     projectId: 'soil-master-b6b9d',
     storageBucket: 'soil-master-b6b9d.appspot.com',
-    iosClientId: '1069663818145-d49nf8dadhdcbqaio1r45j5ifr94fqi8.apps.googleusercontent.com',
+    iosClientId:
+        '1069663818145-d49nf8dadhdcbqaio1r45j5ifr94fqi8.apps.googleusercontent.com',
     iosBundleId: 'com.example.soilmaster',
   );
 }

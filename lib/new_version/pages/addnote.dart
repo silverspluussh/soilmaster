@@ -22,7 +22,7 @@ class _AddnoteState extends ConsumerState<Addnote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Note'),
+        title: const Text('Add New Note'),
         centerTitle: true,
       ),
       body: Form(
@@ -43,7 +43,7 @@ class _AddnoteState extends ConsumerState<Addnote> {
             maxLength: 100,
             controller: body,
             decoration: InputDecoration(
-                label: Text('Body'),
+                label: const Text('Body'),
                 hintText: 'note body',
                 fillColor: kWhiteColor,
                 disabledBorder: OutlineInputBorder(
@@ -82,7 +82,7 @@ class _AddnoteState extends ConsumerState<Addnote> {
               },
               child: Card(
                 color: kPrimaryColor.withOpacity(0.6),
-                child: Text('Add note').px64().py12(),
+                child: const Text('Add note').px64().py12(),
               )),
           const Spacer(),
         ],

@@ -18,7 +18,7 @@ class CitySearchBox extends ConsumerStatefulWidget {
 }
 
 class _CitySearchRowState extends ConsumerState<CitySearchBox> {
-  static const _radius = 30.0;
+  static const _radius = 20.0;
 
   final _searchController = TextEditingController();
 

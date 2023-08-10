@@ -4,6 +4,7 @@ import 'package:soilmaster/main.dart';
 import 'package:soilmaster/new_version/pages/addfertilizer.dart';
 import 'package:soilmaster/new_version/pages/fertilizerrec.dart';
 import 'package:soilmaster/new_version/widgets/navigation.dart';
+import 'package:soilmaster/src/firebase/crops/crepo.dart';
 import 'package:soilmaster/src/firebase/crops/cropdata.dart';
 import 'package:soilmaster/src/widgets/cContainer.dart';
 import 'package:soilmaster/src/widgets/formwidget.dart';
@@ -234,6 +235,23 @@ class _PlantcropState extends ConsumerState<Plantcrop> {
                     ]).p8(),
                   ),
                 ).px8()),
+            Positioned(
+                bottom: 20,
+                left: 10,
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () => ref
+                            .read(cropRepoProvider)
+                            .delcrop(crop: widget.crops),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                          size: 30,
+                        )),
+                    const Text('Delete crop')
+                  ],
+                ))
           ],
         ),
       ),

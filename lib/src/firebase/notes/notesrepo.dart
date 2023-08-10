@@ -47,8 +47,11 @@ class NotesRepo {
         .toList();
   }
 
-  Future<void> deleteNote(NotesModel note, String uid) {
-    return _firestore.doc(notepath(nid: note.nid!, uid: uid)).delete();
+  Future<void> deleteNote(NotesModel note) {
+    return _firestore
+        .doc(notepath(
+            nid: note.nid!, uid: FirebaseAuth.instance.currentUser!.uid))
+        .delete();
   }
 }
 

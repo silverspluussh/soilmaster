@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soilmaster/constants/colors.dart';
 import 'package:soilmaster/new_version/pages/analysis.dart';
 import 'package:soilmaster/new_version/pages/crop.dart';
-import 'package:soilmaster/new_version/pages/home.dart';
+import 'package:soilmaster/src/home.dart';
 import 'package:soilmaster/new_version/pages/notes.dart';
 import 'package:soilmaster/new_version/pages/settings.dart';
 import 'package:soilmaster/new_version/pages/weather.dart';
