@@ -1,5 +1,9 @@
 import 'dart:convert';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
+import 'package:soilmaster/tools/randomgen.dart';
+import '../main.dart';
 
 class SoilMaster {
   int? rain;
@@ -56,12 +60,32 @@ class SoilMast {
   }
 }
 
+scheduleAlarm() async {
+  var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+    'alert',
+    'threshold alert',
+    importance: Importance.max,
+  );
+
+  var platformChannelSpecifics = NotificationDetails(
+    android: androidPlatformChannelSpecifics,
+  );
+
+  await flutterLocalNotificationsPlugin.show(
+      idg(), 'Irrigation', 'Time to irrigate ', platformChannelSpecifics,
+      payload: 'Instant alert');
+}
+
 class ApiCalls {
   Future<SoilMaster> getCurrentdata() async {
     http.Response response = await http.get(
         Uri.parse('http://3.93.200.70:5150/current-values'),
         headers: {'Accept': 'application/json'});
     var body = await json.decode(response.body);
+
+    if (body["current_moisture"] < 50) {
+      await scheduleAlarm();
+    }
 
     return SoilMaster.fromJson(body);
   }
