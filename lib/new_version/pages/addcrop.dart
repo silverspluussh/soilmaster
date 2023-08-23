@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soilmaster/tools/pushnotifications.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../constants/colors.dart';
 import '../../src/firebase/crops/crepo.dart';
 import '../../src/models/crop/crop.dart';
@@ -98,18 +96,7 @@ class _AddCropState extends ConsumerState<AddCrop> {
                 plantingtime: plantingtime.text,
               );
 
-              crop.addCrop(model: cmodel).then((b) async {
-                context.pop();
-                await NotificationBundle().scheduleDailyTenAMNotification();
-                await NotificationBundle().instancems();
-                // return VxToast.show(context,
-                //     textSize: 11,
-                //     msg: 'Crop added successfully.',
-                //     bgColor: const Color.fromARGB(255, 38, 99, 40),
-                //     textColor: Colors.white,
-                //     pdHorizontal: 30,
-                //     pdVertical: 20);
-              });
+              crop.addCrop(model: cmodel);
             },
             child: const Text('Add crop').p8().centered(),
           ),

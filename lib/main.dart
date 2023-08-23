@@ -2,18 +2,20 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:soilmaster/constants/theme.dart';
 import 'package:soilmaster/new_version/splashscreen.dart';
-import 'package:soilmaster/tools/pushnotifications.dart';
 import 'firebase_options.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 late SharedPreferences prefs;
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,14 +23,16 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  var initializationSettingsAndroid =
+      const AndroidInitializationSettings('@mipmap/ic_launcher');
+  var initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   prefs = await SharedPreferences.getInstance();
 
   FlutterFireUIAuth.configureProviders([const EmailProviderConfiguration()]);
   await configureLocalTimeZone();
-
-  await NotificationBundle().initialzeNotification();
-
   runApp(const ProviderScope(
     child: MyApp(),
   ));

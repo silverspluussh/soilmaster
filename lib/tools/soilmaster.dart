@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:soilmaster/tools/pushnotifications.dart';
 
 class SoilMaster {
   int? rain;
@@ -64,10 +62,6 @@ class ApiCalls {
         Uri.parse('http://3.93.200.70:5150/current-values'),
         headers: {'Accept': 'application/json'});
     var body = await json.decode(response.body);
-
-    if (body["current_moisture"] < 50) {
-      await NotificationBundle().instancems();
-    }
 
     return SoilMaster.fromJson(body);
   }

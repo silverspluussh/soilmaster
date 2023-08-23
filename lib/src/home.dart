@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:soilmaster/constants/colors.dart';
-import 'package:soilmaster/tools/pushnotifications.dart';
 import 'package:soilmaster/tools/soilmaster.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -18,6 +18,67 @@ class Homepage extends ConsumerStatefulWidget {
 class _HomepageState extends ConsumerState<Homepage> {
   @override
   Widget build(BuildContext context) {
+    Dialog _dialogue(Size size, BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.green,
+        child: Container(
+          height: size.height * 0.25,
+          width: size.width * 0.75,
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'confirm',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 10),
+              Text('Are you sure you want to log out of soilmaster?',
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context).textTheme.bodyLarge),
+              const SizedBox(height: 15),
+              SizedBox(
+                height: 40,
+                width: size.width * 0.7,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () async {
+                        context.pop();
+                        FirebaseAuth.instance.signOut();
+                      },
+                      child: const Text(
+                        'yes',
+                        style: TextStyle(
+                            color: Colors.red, fontSize: 16, fontFamily: 'Pop'),
+                      ),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'no',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Pop'),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
     Size size = MediaQuery.sizeOf(context);
 
     return Container(
@@ -34,13 +95,19 @@ class _HomepageState extends ConsumerState<Homepage> {
                 return CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
-                      child: const HStack([
-                        Text('Good day user.',
+                      child: HStack([
+                        const Text('Good day user.',
                             style: TextStyle(
                                 fontFamily: 'Go',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16)),
-                        Spacer(),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18)),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () => showDialog(
+                                context: context,
+                                builder: (_) => _dialogue(size, context)),
+                            icon: const Icon(Icons.exit_to_app,
+                                size: 25, color: Colors.red))
                       ]).py8(),
                     ),
                     SliverToBoxAdapter(

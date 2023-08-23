@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soilmaster/main.dart';
 import 'package:soilmaster/new_version/pages/addfertilizer.dart';
@@ -8,10 +9,11 @@ import 'package:soilmaster/src/firebase/crops/crepo.dart';
 import 'package:soilmaster/src/firebase/crops/cropdata.dart';
 import 'package:soilmaster/src/widgets/cContainer.dart';
 import 'package:soilmaster/src/widgets/formwidget.dart';
+import 'package:soilmaster/tools/randomgen.dart';
 import 'package:soilmaster/tools/reminderprovider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../src/models/crop/crop.dart';
-import '../../tools/pushnotifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class Plantcrop extends ConsumerStatefulWidget {
   const Plantcrop(this.crops, {super.key});
@@ -23,8 +25,7 @@ class Plantcrop extends ConsumerStatefulWidget {
 
 class _PlantcropState extends ConsumerState<Plantcrop> {
   TextEditingController time = TextEditingController();
-
-  TimeOfDay tod = TimeOfDay.now();
+  DateTime? _alarmTime;
 
   @override
   Widget build(BuildContext context) {
@@ -140,36 +141,29 @@ class _PlantcropState extends ConsumerState<Plantcrop> {
                                       return;
                                     },
                                     suffix: IconButton(
-                                        onPressed: () => showTimePicker(
-                                                    context: context,
-                                                    initialTime:
-                                                        TimeOfDay.now())
-                                                .then((value) {
-                                              tod = value!;
-                                              time.text =
-                                                  value.format(context) +
-                                                      value.period
-                                                          .toString()
-                                                          .split('.')
-                                                          .last;
-                                            }),
+                                        onPressed: () async {
+                                          var selectedTime =
+                                              await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.now(),
+                                          );
+                                          if (selectedTime != null) {
+                                            final now = DateTime.now();
+                                            var selectedDateTime = DateTime(
+                                                now.year,
+                                                now.month,
+                                                now.day,
+                                                selectedTime.hour,
+                                                selectedTime.minute);
+                                            _alarmTime = selectedDateTime;
+                                          }
+                                        },
                                         icon: const Icon(
                                             Icons.alarm_add_rounded)),
                                   ),
                                   ElevatedButton(
-                                      onPressed: () {
-                                        NotificationBundle()
-                                            .setreminder(
-                                          body: 'Time to irrigate ',
-                                          hour: tod.hour,
-                                          minute: tod.minute,
-                                          id: idgen().toString(),
-                                          title: 'Irrigation',
-                                        )
-                                            .whenComplete(() {
-                                          prefs.setString('time',
-                                              '${tod.hour}: ${tod.minute} ${tod.period.name}');
-
+                                      onPressed: () async {
+                                        onSaveAlarm(true).whenComplete(() {
                                           context.pop();
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(const SnackBar(
@@ -257,6 +251,43 @@ class _PlantcropState extends ConsumerState<Plantcrop> {
         ),
       ),
     );
+  }
+
+  scheduleAlarm(DateTime scheduledNotificationDateTime,
+      {required bool isRepeating}) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'id${idgen()}',
+      'alarm${idg()}',
+      importance: Importance.max,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        idg(),
+        'Irrigation',
+        'Time to irrigate ',
+        tz.TZDateTime.from(scheduledNotificationDateTime, tz.local),
+        platformChannelSpecifics,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        payload: _alarmTime.toString());
+  }
+
+  onSaveAlarm(bool isRepeating) {
+    DateTime? scheduleAlarmDateTime;
+    if (_alarmTime!.isAfter(DateTime.now())) {
+      scheduleAlarmDateTime = _alarmTime;
+    } else {
+      scheduleAlarmDateTime = _alarmTime!.add(const Duration(days: 1));
+    }
+
+    if (scheduleAlarmDateTime != null) {
+      scheduleAlarm(scheduleAlarmDateTime, isRepeating: isRepeating);
+    }
+    Navigator.pop(context);
   }
 }
 

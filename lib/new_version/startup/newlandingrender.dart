@@ -89,10 +89,10 @@ class _MainrenderState extends ConsumerState<Mainrender> {
                 label: 'Crops'),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.settings,
+                  Icons.alarm,
                   size: 20,
                 ),
-                label: 'Settings'),
+                label: 'Reminders'),
           ]),
       body: SafeArea(child: pages![ref.watch(navIndexProvider)]),
     );
